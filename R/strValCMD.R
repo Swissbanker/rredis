@@ -1,5 +1,12 @@
 # This file contains functions that operate on Redis 'string' values.
 
+
+redisAppend <- function(key, value) {
+  value <- .cerealize(value)
+  cmd <- 'APPEND'
+  .redisCmd(.raw(cmd), .raw(key), value)
+}
+
 redisGet <- function(key, raw=FALSE) {
   if(raw) return(.redisRawCmd(.raw('GET'), .raw(key)))
   .redisCmd(.raw('GET'), .raw(key))
